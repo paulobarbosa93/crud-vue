@@ -50,7 +50,7 @@
         </tr>
       </tbody>
     </table>
-    <!-- pagination -->
+    <Pagination :total="total" :page="page" :itens-per-page="itensPerPage" @change-page="onChangePage"></Pagination>
   </div>
  </div>
 </div>
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import Pagination from './Pagination.vue'
+
 export default {
   data() {
     return {
@@ -70,6 +72,9 @@ export default {
       selected: {},
       itensPerPage: 10
     }
+  },
+  components: {
+    Pagination
   },
   methods: {
     showLoading(){
@@ -96,6 +101,10 @@ export default {
     },
     searchBreweries(){
 
+    },
+    onChangePage(page){
+      this.page = page
+      this.loadBreweries()
     }
   },
   created(){
